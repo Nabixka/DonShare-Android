@@ -96,7 +96,6 @@ npm install
 ```bash
 node database/dbCreate.js
 node database/tableCreate.js
-node migrate.js
 ```
 
 # Menjalankan server

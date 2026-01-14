@@ -2,6 +2,7 @@ const pool = require("./db")
 
 async function createTable() {
     try {
+        //done
         await pool.query(`
         CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY,
@@ -10,7 +11,7 @@ async function createTable() {
         email VARCHAR UNIQUE
         )
     `)
-
+        //done
         await pool.query(`
         CREATE TABLE IF NOT EXISTS event(
         id SERIAL PRIMARY KEY,
@@ -28,7 +29,7 @@ async function createTable() {
         FOREIGN KEY (user_id) REFERENCES users(id)
         )
     `)
-
+        //tinggal currency untuk amount
         await pool.query(`
         CREATE TABLE IF NOT EXISTS donasi(
         id SERIAL PRIMARY KEY,
@@ -38,17 +39,6 @@ async function createTable() {
 
         FOREIGN KEY (user_id) REFERENCES users(id),
         FOREIGN KEY (event_id) REFERENCES event(id)
-        )
-    `)
-
-        await pool.query(`
-        CREATE TABLE IF NOT EXISTS history(
-        id SERIAL PRIMARY KEY,
-        user_id INT,
-        donasi_id INT,
-        
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (donasi_id) REFERENCES donasi(id)
         )
     `)
 
