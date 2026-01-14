@@ -1,6 +1,6 @@
-# 💖 Aplikasi Donasi Digital
+# 💖 DonShare
 
-Aplikasi Donasi Digital adalah platform berbasis **Android** yang dirancang untuk **mempermudah proses donasi** serta **menyalurkan bantuan kepada yang membutuhkan** secara cepat, aman, dan transparan.
+DonShare adalah platform berbasis **Android** yang dirancang untuk **mempermudah proses donasi** serta **menyalurkan bantuan kepada yang membutuhkan** secara cepat, aman, dan transparan.
 
 ---
 
