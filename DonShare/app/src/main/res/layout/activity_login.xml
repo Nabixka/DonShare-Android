@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".LoginActivity">
+
+    <!-- JUDUL LOGIN -->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/angkor"
+        android:text="LOGIN"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- INPUT EMAIL -->
+    <EditText
+        android:id="@+id/editEmailLogin"
+        android:layout_width="320dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_kotak"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:paddingStart="15dp"
+        android:textColor="@color/gray"
+        android:textColorHint="#9E9E9E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <!-- INPUT PASSWORD -->
+    <EditText
+        android:id="@+id/editPasswordLogin"
+        android:layout_width="320dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_kotak"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingStart="15dp"
+        android:textColor="@color/gray"
+        android:textColorHint="#9E9E9E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editEmailLogin" />
+
+    <!-- TOMBOL LOGIN -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/gold"
+        android:fontFamily="@font/angkor"
+        android:text="LOGIN"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordLogin" />
+
+    <!-- TEXT Register -->
+    <TextView
+        android:id="@+id/txtSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:text="Belum Punya Akun? Sign Up"
+        android:textColor="#3F51B5"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
