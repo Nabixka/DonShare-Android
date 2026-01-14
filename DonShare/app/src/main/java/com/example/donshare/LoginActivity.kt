@@ -2,6 +2,7 @@ package com.example.donshare
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -30,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
             val email = editEmail.text.toString().trim()
             val password = editPassword.text.toString().trim()
 
+            // 1. Validasi Input
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Harap isi email dan password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -37,38 +39,56 @@ class LoginActivity : AppCompatActivity() {
 
             val loginRequest = LoginRequest(email, password)
 
+            // Tampilkan log untuk memantau proses di Logcat
+            Log.d("LOGIN_DEBUG", "Mencoba login dengan email: $email")
+
             RetrofitClient.instance.loginUser(loginRequest).enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
                         val loginResponse = response.body()
 
+                        // 2. Pengecekan data response yang lebih aman
                         if (loginResponse != null && (loginResponse.status == 200 || loginResponse.status == 201)) {
-                            Toast.makeText(this@LoginActivity, "Selamat Datang!", Toast.LENGTH_SHORT).show()
 
-                            val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                            intent.putExtra("USER_ID", loginResponse.data.id)
-                            startActivity(intent)
-                            finish()
+                            // Pastikan data id ada sebelum pindah
+                            val userId = loginResponse.data?.id
+
+                            if (userId != null) {
+                                Toast.makeText(this@LoginActivity, "Selamat Datang!", Toast.LENGTH_SHORT).show()
+
+                                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                                intent.putExtra("USER_ID", userId)
+
+                                // Membersihkan backstack agar user tidak kembali ke login saat tekan back
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this@LoginActivity, "ID User tidak ditemukan dari server", Toast.LENGTH_SHORT).show()
+                            }
                         } else {
-
-                            Toast.makeText(this@LoginActivity, loginResponse?.message ?: "Gagal Login", Toast.LENGTH_SHORT).show()
+                            val msg = loginResponse?.message ?: "Gagal Login (Status Error)"
+                            Toast.makeText(this@LoginActivity, msg, Toast.LENGTH_SHORT).show()
                         }
                     } else {
-
+                        // 3. Penanganan Error dari ErrorBody (Server mengirim error 400, 401, 500 dll)
                         try {
                             val errorRaw = response.errorBody()?.string()
-                            val jsonObject = JSONObject(errorRaw)
-                            val message = jsonObject.getString("message")
+                            val jsonObject = JSONObject(errorRaw ?: "{}")
+                            val message = jsonObject.optString("message", "Email atau Password Salah")
                             Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
+                            Log.e("LOGIN_ERROR", "Error Body: $errorRaw")
                         } catch (e: Exception) {
-                            Toast.makeText(this@LoginActivity, "Email atau Password Salah", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@LoginActivity, "Terjadi kesalahan server", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-
-                    Toast.makeText(this@LoginActivity, "Koneksi ke server gagal: ${t.message}", Toast.LENGTH_LONG).show()
+                    // 4. Penanganan gagal koneksi (Internet mati / server down)
+                    Log.e("LOGIN_FAILURE", "Pesan: ${t.message}")
+                    Toast.makeText(this@LoginActivity, "Koneksi gagal: Periksa internet Anda", Toast.LENGTH_LONG).show()
                 }
             })
         }

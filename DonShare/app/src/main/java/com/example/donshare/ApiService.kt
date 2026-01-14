@@ -15,7 +15,11 @@ interface ApiService {
 
     @GET("users/{id}")
     fun getUserProfile(@Path("id") id: Int): Call<UserResponse>
+
+    @GET("event/")
+    fun getAllDonasi(): Call<DonasiResponse>
 }
+
 
 data class UserData(
     val id: Int,
@@ -34,7 +38,6 @@ data class RegisterRequest(
     val password: String
 )
 
-
 data class LoginResponse(
     val status: Int,
     val message: String,
@@ -51,4 +54,16 @@ data class UserResponse(
     val status: Int,
     val message: String,
     val data: UserData
+)
+
+data class DonasiResponse(
+    val status: Int,
+    val message: String,
+    val data: List<DonasiItem>
+)
+
+data class DonasiItem(
+    val id: Int,
+    val name: String,
+    val image: String
 )

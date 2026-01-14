@@ -78,10 +78,13 @@
 
                 <!-- DONASI -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardDonasi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="3dp">
 
