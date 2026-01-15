@@ -3,15 +3,14 @@ const event = require("../models/eventModel")
 const user = require("../models/userModel")
 
 exports.getDonasi = async (req, res) => {
-    try{
+    try {
         const list = await donasi.getDonasi()
         res.status(200).json({
             status: 200,
             message: "Berhasil",
             data: list
         })
-    }
-    catch(err){
+    } catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -20,23 +19,23 @@ exports.getDonasi = async (req, res) => {
 }
 
 exports.getDonasiById = async (req, res) => {
-    try{
+    try {
         const { id } = req.params
-        const list = await donasi.getDonasiById(id)
-        if(!list){
-            return res.status(200).json({
-                status: 200,
-                message: "Tidak Ada Donasi"
+        const data = await donasi.getDonasiById(id)
+
+        if (!data) {
+            return res.status(404).json({
+                status: 404,
+                message: "Donasi tidak ditemukan"
             })
         }
 
         res.status(200).json({
             status: 200,
             message: "Berhasil",
-            data: list
+            data
         })
-    }
-    catch(err){
+    } catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -45,41 +44,46 @@ exports.getDonasiById = async (req, res) => {
 }
 
 exports.createDonasi = async (req, res) => {
-    try{
-        const { user_id, event_id, amount } = req.body
+    try {
+        const { user_id, event_id, user_payment_id, amount } = req.body
 
-        if(!user_id || !event_id || !amount){
+        if (!user_id || !event_id || !user_payment_id || !amount) {
             return res.status(400).json({
                 status: 400,
-                message: "Isi Yang Benar Wok"
+                message: "Data tidak lengkap"
             })
         }
 
-        const user_exist = await user.getUser(user_id)
-        if(!user_exist){
+        const userExist = await user.getUser(user_id)
+        if (!userExist) {
             return res.status(404).json({
                 status: 404,
-                message: "Tidak Ada User"
+                message: "User tidak ditemukan"
             })
         }
 
-        const event_exist = await event.getEventById(event_id)
-        if (!event_exist) {
+        const eventExist = await event.getEventById(event_id)
+        if (!eventExist) {
             return res.status(404).json({
                 status: 404,
                 message: "Event tidak ditemukan"
             })
         }
 
-        const list = await donasi.createDonasi({user_id, event_id, amount})
-        res.status(201).json({
-            status: 201,
-            message: "Berhasil Berdonasi",
-            data: list
+        const result = await donasi.createDonasi({
+            user_id,
+            event_id,
+            user_payment_id,
+            amount
         })
 
-    }
-    catch(err){
+        res.status(201).json({
+            status: 201,
+            message: "Berhasil berdonasi",
+            data: result
+        })
+
+    } catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -88,20 +92,26 @@ exports.createDonasi = async (req, res) => {
 }
 
 exports.getDonasiByUser = async (req, res) => {
-    try{
+    try {
         const { user_id } = req.params
+        const data = await donasi.getDonasiByUser(user_id)
 
-        const list = await donasi.getDonasiByUser(user_id)
+        if (!data) {
+            return res.status(404).json({
+                status: 404,
+                message: "Belum ada donasi"
+            })
+        }
+
         res.status(200).json({
             status: 200,
             message: "Berhasil",
-            data: list
+            data
         })
-    }
-    catch(err){
+    } catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
         })
-    }   
+    }
 }

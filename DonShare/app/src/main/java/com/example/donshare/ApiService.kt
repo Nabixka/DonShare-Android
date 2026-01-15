@@ -22,8 +22,10 @@ interface ApiService {
 
     @GET("payment/user/{id}")
     fun getUserPayments(@Path("id") id: Int): Call<UserPaymentResponse>
-}
 
+    @POST("donasi/")
+    fun createDonasi(@Body request: DonasiRequest): Call<CreateDonasiResponse>
+}
 
 data class UserData(
     val id: Int,
@@ -59,18 +61,17 @@ data class UserResponse(
     val message: String,
     val data: UserData
 )
-
 data class DonasiResponse(
     val status: Int,
     val message: String,
     val data: List<DonasiItem>
 )
-
 data class DonasiItem(
     val id: Int,
     val name: String,
-    val image: String,
-    val total_amount: String
+    val image: String?,
+    @SerializedName("total_amount")
+    val totalAmount: String?
 )
 
 data class UserPaymentResponse(
@@ -90,4 +91,17 @@ data class PaymentMethodItem(
     val id: Int,
     val name: String,
     val image: String? = null
+)
+
+data class DonasiRequest(
+    val user_id: Int,
+    val event_id: Int,
+    val user_payment_id: Int,
+    val amount: Long
+)
+
+data class CreateDonasiResponse(
+    val status: Int,
+    val message: String,
+    val data: Any?
 )

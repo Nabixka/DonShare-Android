@@ -40,30 +40,29 @@ const getUserPayment = async () => {
     return result.rows
 }
 
-const getUserPaymentById = async (id) => {
+const getUserPaymentById = async (userId) => {
     const result = await pool.query(`
         SELECT
         up.id,
         json_build_object(
-        'id', u.id,
-        'name', u.name
+            'id', u.id,
+            'name', u.name
         ) AS user,
         json_build_object(
-        'id', pm.id,
-        'name', pm.name,
-        'image', pm.image
+            'id', pm.id,
+            'name', pm.name,
+            'image', pm.image
         ) AS payment_method,
         up.nomor
-
         FROM user_payment up
         LEFT JOIN users u ON up.user_id = u.id
         LEFT JOIN payment_method pm ON up.payment_method_id = pm.id
         WHERE up.user_id = $1
-        `,
-    [id])
+    `, [userId])
 
     return result.rows
 }
+
 
 const createUserPayment = async (data) => {
     const { user_id, payment_method_id, nomor} = data
