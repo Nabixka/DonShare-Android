@@ -16,7 +16,8 @@ async function createTable() {
         CREATE TABLE IF NOT EXISTS event(
         id SERIAL PRIMARY KEY,
         name VARCHAR,
-        image TEXT
+        image TEXT,
+        total_amount BIGINT DEFAULT 0
         )
     `)
 

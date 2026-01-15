@@ -2,6 +2,7 @@ package com.example.donshare
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,11 @@ class DonasiListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donasi_list)
 
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish()
+        }
+
         rvDonasi = findViewById(R.id.rvDonasi)
         rvDonasi.layoutManager = LinearLayoutManager(this)
 
@@ -30,6 +36,7 @@ class DonasiListActivity : AppCompatActivity() {
             override fun onResponse(call: Call<DonasiResponse>, response: Response<DonasiResponse>) {
                 if (response.isSuccessful) {
                     val listData = response.body()?.data ?: emptyList()
+
                     adapter = DonasiAdapter(listData)
                     rvDonasi.adapter = adapter
                 } else {

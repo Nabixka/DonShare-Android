@@ -13,13 +13,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Gambar -->
         <ImageView
             android:id="@+id/imgDonasi"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/donasi1" />
+            android:scaleType="centerCrop" />
 
+        <!-- Nama Bencana -->
         <TextView
             android:id="@+id/tvNamaBencana"
             android:layout_width="match_parent"
@@ -28,8 +29,46 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:padding="12dp"
+            android:paddingTop="12dp"
             android:gravity="center" />
+
+        <!-- Amount Container -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#E8F5E9">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terkumpul"
+                    android:textSize="12sp"
+                    android:textColor="#388E3C" />
+
+                <TextView
+                    android:id="@+id/tvDonationAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#2E7D32" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

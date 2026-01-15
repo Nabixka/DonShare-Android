@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
@@ -19,6 +20,12 @@ class SignUpActivity : AppCompatActivity() {
         val editName = findViewById<EditText>(R.id.editName)
         val editEmail = findViewById<EditText>(R.id.editEmail)
         val editPassword = findViewById<EditText>(R.id.editPassword)
+        val txtBackToLogin = findViewById<TextView>(R.id.txtBackToLogin)
+
+        txtBackToLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
 
         btnRegister.setOnClickListener {
             val name = editName.text.toString().trim()
@@ -32,22 +39,38 @@ class SignUpActivity : AppCompatActivity() {
 
             val registerRequest = RegisterRequest(name, email, password)
 
-            RetrofitClient.instance.registerUser(registerRequest).enqueue(object : Callback<RegisterResponse> {
-                override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@SignUpActivity, "Registrasi Berhasil!", Toast.LENGTH_SHORT).show()
+            RetrofitClient.instance.registerUser(registerRequest)
+                .enqueue(object : Callback<RegisterResponse> {
+                    override fun onResponse(
+                        call: Call<RegisterResponse>,
+                        response: Response<RegisterResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(
+                                this@SignUpActivity,
+                                "Registrasi Berhasil!",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
-                        startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
-                        finish()
-                    } else {
-                        Toast.makeText(this@SignUpActivity, "Registrasi Gagal: ${response.code()}", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(
+                                this@SignUpActivity,
+                                "Registrasi Gagal: ${response.code()}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                    Toast.makeText(this@SignUpActivity, "Koneksi Bermasalah: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                        Toast.makeText(
+                            this@SignUpActivity,
+                            "Koneksi Bermasalah: ${t.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
         }
     }
 }

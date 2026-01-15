@@ -65,5 +65,6 @@ data class DonasiResponse(
 data class DonasiItem(
     val id: Int,
     val name: String,
-    val image: String
+    val image: String,
+    val total_amount: String
 )

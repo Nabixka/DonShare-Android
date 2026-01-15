@@ -31,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
             val email = editEmail.text.toString().trim()
             val password = editPassword.text.toString().trim()
 
-            // 1. Validasi Input
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Harap isi email dan password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -39,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
 
             val loginRequest = LoginRequest(email, password)
 
-            // Tampilkan log untuk memantau proses di Logcat
             Log.d("LOGIN_DEBUG", "Mencoba login dengan email: $email")
 
             RetrofitClient.instance.loginUser(loginRequest).enqueue(object : Callback<LoginResponse> {
@@ -47,10 +45,8 @@ class LoginActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val loginResponse = response.body()
 
-                        // 2. Pengecekan data response yang lebih aman
                         if (loginResponse != null && (loginResponse.status == 200 || loginResponse.status == 201)) {
 
-                            // Pastikan data id ada sebelum pindah
                             val userId = loginResponse.data?.id
 
                             if (userId != null) {
@@ -59,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
                                 val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                                 intent.putExtra("USER_ID", userId)
 
-                                // Membersihkan backstack agar user tidak kembali ke login saat tekan back
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
                                 startActivity(intent)
@@ -72,7 +67,6 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, msg, Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        // 3. Penanganan Error dari ErrorBody (Server mengirim error 400, 401, 500 dll)
                         try {
                             val errorRaw = response.errorBody()?.string()
                             val jsonObject = JSONObject(errorRaw ?: "{}")
@@ -86,7 +80,6 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    // 4. Penanganan gagal koneksi (Internet mati / server down)
                     Log.e("LOGIN_FAILURE", "Pesan: ${t.message}")
                     Toast.makeText(this@LoginActivity, "Koneksi gagal: Periksa internet Anda", Toast.LENGTH_LONG).show()
                 }

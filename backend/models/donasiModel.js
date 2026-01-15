@@ -57,6 +57,10 @@ const createDonasi = async (data) => {
         [user_id, event_id, amount]
     )
 
+    const update = await pool.query(`
+        UPDATE event SET total_amount = total_amount + $1 WHERE id = $2`,
+    [amount, event_id])
+
     const newId = create.rows[0].id
 
     const result = await pool.query(`

@@ -46,7 +46,7 @@ exports.createEvent = async (req, res) => {
     try{
         const { name } = req.body
         
-        const imageUrl = req.file ? `http://localhost:3000/uploads/event/${req.file.filename}` : null
+        const imageUrl = req.file ? `http://192.168.56.1:3000/uploads/event/${req.file.filename}` : null
 
         if(!name || !imageUrl){
             return res.status(400).json({
