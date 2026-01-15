@@ -8,6 +8,9 @@ const storage = multer.diskStorage({
         if(file.fieldname === "image" && req.baseUrl.includes("event")){
             folder = "uploads/event"
         }
+        if(file.fieldname === "image" && req.baseUrl.includes("method")){
+            folder = "uploads/payment"
+        }
 
         cb(null, folder)
     },
@@ -20,4 +23,8 @@ const uploadEvent = multer({
     storage
 })
 
-module.exports = { uploadEvent }
+const uploadPayment = multer({
+    storage
+})
+
+module.exports = { uploadEvent, uploadPayment }

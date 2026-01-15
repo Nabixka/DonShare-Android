@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="43dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:contentDescription="Back"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Masukkan Nominal"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+    </RelativeLayout>
+
+    <!-- Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- INPUT MANUAL -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nominal Donasi"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+
+            <EditText
+                android:id="@+id/etNominal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan nominal"
+                android:inputType="number"
+                android:padding="12dp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Button -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:columnCount="2"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false"
+                android:useDefaultMargins="true">
+
+                <Button
+                    android:id="@+id/btn50k"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:backgroundTint="@color/green"
+                    android:text="Rp 50rb"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp" />
+
+                <Button
+                    android:id="@+id/btn100k"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:backgroundTint="@color/green"
+                    android:text="Rp 100rb"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp" />
+
+                <Button
+                    android:id="@+id/btn200k"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:backgroundTint="@color/green"
+                    android:text="Rp 200rb"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp" />
+
+                <Button
+                    android:id="@+id/btn500k"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:backgroundTint="@color/green"
+                    android:text="Rp 500rb"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp" />
+
+                <Button
+                    android:id="@+id/btn1jt"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:backgroundTint="@color/green"
+                    android:text="Rp 1jt"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp" />
+
+                <Button
+                    android:id="@+id/btn5jt"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:backgroundTint="@color/green"
+                    android:text="Rp 5jt"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp" />
+
+            </GridLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Lanjut -->
+    <Button
+        android:id="@+id/btnLanjut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/gold"
+        android:padding="14dp"
+        android:text="Lanjut Pembayaran"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

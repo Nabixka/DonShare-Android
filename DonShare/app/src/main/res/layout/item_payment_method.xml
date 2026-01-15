@@ -2,40 +2,61 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardPayment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:orientation="horizontal"
+        android:padding="16dp"
         android:gravity="center_vertical">
 
+        <!-- Logo -->
         <ImageView
             android:id="@+id/imgPayment"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_wallet"/>
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/donasi1" />
 
-        <TextView
-            android:id="@+id/tvPaymentName"
+        <!-- Info -->
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="16dp"
-            android:text="Metode Pembayaran"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"/>
+            android:orientation="vertical"
+            android:paddingStart="12dp">
 
+            <TextView
+                android:id="@+id/tvPaymentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BNI"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/tvPaymentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="081234567890"
+                android:textSize="14sp"
+                android:textColor="#666666"/>
+        </LinearLayout>
+
+        <!-- Arrow -->
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/back"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:rotation="180"/>
 
     </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.example.donshare
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.content.Intent
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +43,12 @@ class DonasiAdapter(private val listDonasi: List<DonasiItem>) :
             .error(R.drawable.donasi1)
             .centerCrop()
             .into(holder.imgDonasi)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, paymentMethodActivity::class.java)
+            intent.putExtra("EVENT_ID", item.id)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = listDonasi.size

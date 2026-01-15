@@ -1,5 +1,6 @@
 package com.example.donshare
 
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -18,6 +19,9 @@ interface ApiService {
 
     @GET("event/")
     fun getAllDonasi(): Call<DonasiResponse>
+
+    @GET("payment/user/{id}")
+    fun getUserPayments(@Path("id") id: Int): Call<UserPaymentResponse>
 }
 
 
@@ -67,4 +71,23 @@ data class DonasiItem(
     val name: String,
     val image: String,
     val total_amount: String
+)
+
+data class UserPaymentResponse(
+    val status: Int,
+    val message: String,
+    val data: List<UserPaymentItem>
+)
+
+data class UserPaymentItem(
+    val id: Int,
+    val nomor: String,
+    @SerializedName("payment_method")
+    val paymentMethod: PaymentMethodItem
+)
+
+data class PaymentMethodItem(
+    val id: Int,
+    val name: String,
+    val image: String? = null
 )
