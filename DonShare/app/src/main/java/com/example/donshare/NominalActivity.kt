@@ -61,6 +61,8 @@ class NominalActivity : AppCompatActivity() {
                     putExtra("EVENT_NAME", eventName)
                     putExtra("USER_PAYMENT_ID", userPaymentId)
                     putExtra("METHOD_NAME", methodName)
+                    putExtra("METHOD_IMAGE", intent.getStringExtra("METHOD_IMAGE"))
+                    putExtra("ACCOUNT_NUMBER", intent.getStringExtra("ACCOUNT_NUMBER"))
                     putExtra("AMOUNT", cleanString.toLong())
                 }
                 startActivity(intent)

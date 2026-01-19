@@ -98,11 +98,14 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="40dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="#F0F0F0" />
+                    <ImageView
+                        android:id="@+id/ivPaymentMethod"
+                        android:layout_width="45dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@color/gold"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/coin" />
 
                     <TextView
                         android:id="@+id/tvPaymentMethod"

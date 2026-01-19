@@ -25,6 +25,9 @@ interface ApiService {
 
     @POST("donasi/")
     fun createDonasi(@Body request: DonasiRequest): Call<CreateDonasiResponse>
+
+    @GET("donasi/user/{id}")
+    fun getHistoryDonasi(@Path("id") id: Int): Call<HistoryResponse>
 }
 
 data class UserData(
@@ -104,4 +107,34 @@ data class CreateDonasiResponse(
     val status: Int,
     val message: String,
     val data: Any?
+)
+
+data class HistoryResponse(
+    val status: Int,
+    val message: String,
+    val data: HistoryData
+)
+
+data class HistoryData(
+    val user: UserInfo,
+    val donations: List<DonationHistoryItem>
+)
+
+data class UserInfo(val name: String)
+
+data class DonationHistoryItem(
+    val id: Int,
+    val amount: String,
+    val event: HistoryEvent,
+    val payment: HistoryPayment
+)
+
+data class HistoryEvent(
+    val name: String,
+    val image: String
+)
+
+data class HistoryPayment(
+    val method: String,
+    val number: String
 )

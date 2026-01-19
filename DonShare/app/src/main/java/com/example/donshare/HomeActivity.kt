@@ -65,6 +65,14 @@ class HomeActivity : AppCompatActivity() {
                     .putExtra("USER_ID", userId)
             )
         }
+
+        val cardHistory = findViewById<MaterialCardView>(R.id.cardHistory)
+        cardHistory.setOnClickListener {
+            startActivity(
+                Intent(this, HistoryDonasiActivity::class.java)
+                    .putExtra("USER_ID", userId)
+            )
+        }
     }
 
     override fun onDestroy() {

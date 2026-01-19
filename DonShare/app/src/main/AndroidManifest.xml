@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DonShare"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".HistoryDonasiActivity"
+            android:exported="false" />
+        <activity
             android:name=".ConfirmDonationActivity"
             android:exported="false" />
         <activity

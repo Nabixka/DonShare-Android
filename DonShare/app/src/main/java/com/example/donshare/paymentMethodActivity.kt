@@ -19,6 +19,7 @@ class paymentMethodActivity : AppCompatActivity() {
     private var userId: Int = -1
     private var eventName: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment_method)
@@ -53,6 +54,8 @@ class paymentMethodActivity : AppCompatActivity() {
                         intent.putExtra("USER_ID", userId)
                         intent.putExtra("PAYMENT_ID", selected.id)
                         intent.putExtra("METHOD_NAME", selected.paymentMethod.name)
+                        intent.putExtra("METHOD_IMAGE", selected.paymentMethod.image)
+                        intent.putExtra("ACCOUNT_NUMBER", selected.nomor)
                         startActivity(intent)
                     }
                     rvPayment.adapter = adapter

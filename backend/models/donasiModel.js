@@ -95,10 +95,15 @@ const getDonasiByUser = async (id) => {
             d.id AS donation_id,
             e.name AS event_name,
             e.image AS event_image,
-            d.amount
+            d.amount,
+
+            pm.name AS payment_method,
+            up.nomor AS payment_number
         FROM donasi d
         JOIN users u ON d.user_id = u.id
         JOIN event e ON d.event_id = e.id
+        JOIN user_payment up ON d.user_payment_id = up.id
+        JOIN payment_method pm ON up.payment_method_id = pm.id
         WHERE d.user_id = $1
         ORDER BY d.id DESC
     `, [id])
@@ -115,7 +120,11 @@ const getDonasiByUser = async (id) => {
                 name: row.event_name,
                 image: row.event_image
             },
-            amount: row.amount
+            amount: row.amount,
+            payment: {
+                method: row.payment_method,
+                number: row.payment_number
+            }
         }))
     }
 }
