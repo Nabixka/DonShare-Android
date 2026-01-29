@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +28,15 @@ class ProfilActivity : AppCompatActivity() {
         val btnEdit = findViewById<Button>(R.id.btnEditProfile)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
+        val btnManagePayment = findViewById<MaterialButton>(R.id.btnManagePayment)
+
         val userId = intent.getIntExtra("USER_ID", -1)
+
+        btnManagePayment.setOnClickListener {
+            val intent = Intent(this, ManagePaymentMethodActivity::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent) 
+        }
 
         Log.d("PROFIL_DEBUG", "User ID yang diterima: $userId")
 

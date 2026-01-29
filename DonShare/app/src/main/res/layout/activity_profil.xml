@@ -43,69 +43,131 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Info Section -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardInfo"
+    <!-- Info Section Scrollable (Agar tidak tertutup Bottom Nav di layar kecil) -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/headerProfil"
-        android:layout_marginHorizontal="25dp"
+        android:layout_above="@id/bottom_navigation"
         android:layout_marginTop="-30dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp">
+        android:clipToPadding="false"
+        android:paddingBottom="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textColor="@color/gray"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/txtProfileEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="user@email.com"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="15dp"
-                android:background="#EEEEEE" />
-
-            <!-- TOMBOL EDIT PROFILE -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditProfile"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            <!-- CARD INFO USER -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Profil"
-                android:textColor="@color/gold"
-                app:cornerRadius="10dp"
-                app:strokeColor="@color/gold" />
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginBottom="15dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtProfileEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="user@email.com"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="15dp"
+                        android:background="#EEEEEE" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditProfile"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Edit Profil"
+                        android:textColor="@color/gold"
+                        app:cornerRadius="10dp"
+                        app:strokeColor="@color/gold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CARD METHOD PAYMENT (BARU) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginBottom="15dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Metode Pembayaran"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kelola rekening atau e-wallet anda"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="15dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnManagePayment"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kelola Pembayaran"
+                        android:textColor="@color/green"
+                        app:cornerRadius="10dp"
+                        app:icon="@drawable/coin"
+                        app:iconGravity="textStart"
+                        app:strokeColor="@color/green" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- TOMBOL LOGOUT -->
             <Button
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="30dp"
                 android:backgroundTint="#FF5252"
                 android:text="Logout"
                 android:textColor="@android:color/white"
                 app:cornerRadius="10dp" />
 
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -114,9 +176,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/bg_kotak"
-        android:foregroundGravity="center"
         app:itemIconSize="26dp"
         app:itemIconTint="@color/gold"
         app:itemTextColor="@color/gold"

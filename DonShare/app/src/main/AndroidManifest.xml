@@ -15,6 +15,12 @@
         android:theme="@style/Theme.DonShare"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".createMethodPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManagePaymentMethodActivity"
+            android:exported="false" />
+        <activity
             android:name=".HistoryDonasiActivity"
             android:exported="false" />
         <activity
